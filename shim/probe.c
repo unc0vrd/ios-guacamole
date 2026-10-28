@@ -485,10 +485,14 @@ probe_tlmm(void)
 		}
 	}
 	con_hex("TLMM pins", nz);
+#ifndef BOARD_NO_TLMM_WRITE
 	uint32_t before = TLMM_CTL(104);
 	TLMM_CTL(104) = 0x000000c3u;	/* gpio, pull-up, 8 mA, input */
 	uint32_t after = TLMM_CTL(104);
 	con_hex2("TLMM wr", "old=", before, "new=", after);
+#else
+	con_str("TLMM wr", "skipped: gpio104 is in use on this board");
+#endif
 #undef TLMM_CTL
 #undef TLMM_IO
 #undef TLMM_TILE

@@ -39,6 +39,23 @@ MIRROR = {
         'RPMh TCS': 0x18220d00,
         'RPMh cmd DB': 0x0c3f000c,
     },
+    # beyond2q is the same SM8150 as guacamole: identical SoC blocks.
+    'beyond2q': {
+        'SPMI core': 0x0c440000,
+        'SPMI observer': 0x0e600000,
+        'SPMI config': 0x0c40a000,
+        'USB GCC': 0x00100000,
+        'USB DWC3': 0x0a600000,
+        'USB HS PHY': 0x088e2000,
+        'USB QMP PHY': 0x088e8000,
+        'RCG/SE17': 0x00c80000,
+        'TLMM': 0x03000000,
+        'PSHOLD': 0x0c264000,
+        'IMEM': 0x146bf000,
+        'RPMh RSC': 0x18220000,
+        'RPMh TCS': 0x18220d00,
+        'RPMh cmd DB': 0x0c3f000c,
+    },
     'sweet': {
         'SPMI core': 0x0c440000,
         'SPMI observer': 0x0e600000,

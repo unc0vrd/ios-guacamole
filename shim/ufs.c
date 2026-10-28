@@ -14,6 +14,19 @@
 #include "console.h"
 #include "ufs.h"
 
+/* Freestanding strcmp: clang lowers the __builtin_strcmp fallback (runtime
+ * lhs) to a library call, which -nostdlib cannot resolve; gcc inlines the
+ * constant-rhs cases and leaves this unused. */
+__attribute__((unused))
+static int strcmp(const char *a, const char *b)
+{
+	while (*a && *a == *b) {
+		a++;
+		b++;
+	}
+	return (int)(unsigned char)*a - (int)(unsigned char)*b;
+}
+
 #define REG_CAP		0x00
 #define REG_VER		0x08
 #define REG_IS		0x20

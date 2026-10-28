@@ -100,6 +100,47 @@ DEVICES = {
         'memory_frequency': 2133000000,
         'bus_frequency': 100000000,
     },
+    'beyond2q': {
+        # Samsung Galaxy S10+ (beyond2q, SM-G9750, SM8150 v2.1). Audited against
+        # the phone's live FDT on 2026-10-28 (dtb/beyond2q-live.dtb, overlay
+        # "BEYOND2Q CHNHK PROJECT Rev09"); see BEYOND2Q.md.
+        'name': 'Samsung Galaxy S10+ (beyond2q, SM8150)',
+        'board_compat': 'samsung,beyond2q',
+        'soc_compat': 'qcom,sm8150',
+        # DDR (live FDT, 6 GB board): 0x80000000+0x3cc00000,
+        # 0xc0000000+0x80000000 and 0x140000000+0xc0000000. The low and mid
+        # banks carry Samsung carve-outs (tima/rkp/uh at 0xb0000000,
+        # sec_debug/ramoops 0xc1100000-0xc1c01000, camera 0xc2000000-0xd6000000,
+        # qseecom_ta 0xff000000, sec_debug_rdx_bootdev 0x100000000+173 MiB);
+        # the high bank has none, so the phone path uses it. Unlike guacamole
+        # the mid bank is not clean: phys_base/mem_size name its free gap
+        # 0xd6000000-0xff000000 for lowmem/QEMU runs.
+        'phys_base': 0xd6000000,
+        'mem_size': 0x29000000,
+        'high_phys_base': 0x140000000,
+        'high_mem_size': 0xc0000000,
+        'gicd': 0x17a00000,
+        'gicd_size': 0x10000,
+        'gicr': 0x17a60000,
+        'gicr_size': 0x100000,
+        'timebase': 19200000,
+        'vtimer_intid': 19,
+        # cont_splash_region 0x9C400000 + 0x02000000 (32 MiB), aliased by
+        # disp_rdump_region. S6E3HA9 1440x3040, a8r8g8b8.
+        'fb': 0x9c400000,
+        'fb_size': 0x2000000,
+        'fb_w': 1440,
+        'fb_h': 3040,
+        'fb_stride': 1440 * 4,
+        'ufs': 0x01d84000,
+        'ufs_size': 0x3000,
+        'cpu_compat': 'qcom,kryo485',
+        'cpus': 8,
+        'cpu_regs': [0, 0x100, 0x200, 0x300, 0x400, 0x500, 0x600, 0x700],
+        'cpu_clocks': [1785600000] * 4 + [2419200000] * 3 + [2841600000],
+        'memory_frequency': 2133000000,
+        'bus_frequency': 100000000,
+    },
 }
 
 
